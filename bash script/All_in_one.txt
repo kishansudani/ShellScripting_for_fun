@@ -1,0 +1,163 @@
+1 - use for loops to display only odd natural numbers from 1 to 99.
+
+ANS:
+
+for number in {1..99..2}
+do
+    echo $number
+done
+
+-----------------------------------------------------------------------------------------------------------------------
+
+2 - Write a Bash script which accepts name as input and displays the greeting "Welcome (name)"
+
+ANS:
+
+read name
+echo "Welcome $name"
+
+-----------------------------------------------------------------------------------------------------------------------
+
+3 - Use a for loop to display the natural numbers from 1 to 50.
+
+ANS:
+
+for number in {1..50}
+do
+    echo $number
+done
+
+-----------------------------------------------------------------------------------------------------------------------
+
+4 - Given two integers, X and Y, find their sum, difference, product, and quotient.
+
+ANS:
+
+read x
+read y
+
+echo $((x + y))
+echo $((x - y))
+echo $((x * y))
+echo $((x / y))
+
+or
+
+read X
+read Y
+printf "%s\n" $X{+,-,*,/}"($Y)" | bc
+
+-----------------------------------------------------------------------------------------------------------------------
+
+5 - Given two integers, X and Y, identify whether X<Y or X>Y or X=Y.
+
+ANS:
+
+read x
+read y
+[[ $x -gt $y ]] && echo 'X is greater than Y'
+[[ $x -eq $y ]] && echo 'X is equal to Y'
+[[ $x -lt $y ]] && echo 'X is less than Y'
+
+or
+
+read X
+read Y
+if (( X > Y )); then
+    printf "X is greater than Y"
+elif (( X == Y )); then
+    printf "X is equal to Y"
+else
+    printf "X is less than Y"
+fi
+
+-----------------------------------------------------------------------------------------------------------------------
+
+6 - Given three integers (X, Y, and Z) representing the three sides of a triangle, identify whether the triangle is scalene, isosceles, or equilateral.
+->If all three sides are equal, output EQUILATERAL.
+->Otherwise, if any two sides are equal, output ISOSCELES.
+->Otherwise, output SCALENE.
+
+ANS - 
+
+
+read a
+read b
+read c
+
+if [[ $a == $b && $b == $c ]]
+then
+    echo 'EQUILATERAL';
+elif [[ $a == $b || $b == $c || $a == $c ]]
+then
+    echo 'ISOSCELES';
+else
+    echo 'SCALENE';
+fi
+
+-----------------------------------------------------------------------------------------------------------------------
+
+7 - A mathematical expression containing +,-,*,^, / and parenthesis will be provided. Read in the expression, then evaluate it. Display the result rounded to 3 decimal places.
+
+ANS - 
+
+read num
+echo $num | bc -l | xargs printf "%.3f"
+
+-----------------------------------------------------------------------------------------------------------------------
+
+8 - Given N integers, compute their average, rounded to three decimal places.
+
+ANS - 
+
+read n
+for i in $(seq 1 $n);
+    do
+        read num
+        sum=$((sum + num))
+    done
+printf "%.3f" $(echo "$sum/$n" | bc -l)
+
+-----------------------------------------------------------------------------------------------------------------------
+
+9 - Display the first 20 lines of an input file.
+
+ANS - 
+
+cat $1 | head -n 20
+
+-----------------------------------------------------------------------------------------------------------------------
+
+10 -  Display the first 20 characters of an input file.
+
+ANS : 
+
+head -c20
+
+-----------------------------------------------------------------------------------------------------------------------
+
+11 - Display the lines (from line number 12 to 22, both inclusive) of a given text file.
+
+ANS : 
+
+head -n 22 | tail -n +12
+
+-----------------------------------------------------------------------------------------------------------------------
+
+12 - Display the last  lines of an input file.
+
+ANS  :
+
+tail -n20
+
+-----------------------------------------------------------------------------------------------------------------------
+
+13 - Read in one character from STDIN.
+If the character is 'Y' or 'y' display "YES".
+If the character is 'N' or 'n' display "NO".
+No other character will be provided as input.
+
+ANS : 
+
+read char; 
+echo -e "YES\nNO\n" | grep -i $char
